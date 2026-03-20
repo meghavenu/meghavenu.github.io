@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Megha V</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.contact-wrap{position:relative;z-index:2;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:6rem;}
+.c-left{padding:6rem 4vw 4rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);position:relative;}
+.c-left::after{content:'';position:absolute;right:0;top:20%;bottom:20%;width:1px;background:linear-gradient(to bottom,transparent,var(--violet),transparent);}
+.c-title{font-family:var(--font-display);font-size:clamp(3rem,7vw,5.5rem);font-weight:900;line-height:.9;letter-spacing:-.025em;margin-bottom:1.5rem;}
+.c-title .line1{display:block;color:var(--text-primary);}
+.c-title .line2{display:block;font-style:italic;font-weight:400;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.c-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--text-secondary);line-height:1.8;max-width:420px;margin-bottom:3rem;}
+
+.avail-chip{display:inline-flex;align-items:center;gap:.7rem;padding:.6rem 1.2rem;background:rgba(15,244,198,0.08);border:1px solid rgba(15,244,198,0.2);border-radius:20px;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:2.5rem;}
+.avail-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+.c-links{display:flex;flex-direction:column;gap:.7rem;}
+.c-link{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.3rem;border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text-secondary);transition:border-color .25s,color .25s,background .25s,transform .25s;}
+.c-link:hover{border-color:var(--violet);color:var(--text-primary);background:rgba(168,85,247,0.08);transform:translateX(6px);}
+.c-link-icon{width:38px;height:38px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .25s,background .25s;}
+.c-link:hover .c-link-icon{border-color:var(--violet);background:rgba(168,85,247,0.15);}
+.c-link-icon svg{width:15px;height:15px;color:var(--teal);}
+.c-link-type{font-family:var(--font-mono);font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.1rem;}
+.c-link-val{font-size:.88rem;}
+
+.c-right{padding:6rem 4vw 4rem;display:flex;flex-direction:column;justify-content:center;}
+.c-right h3{font-family:var(--font-display);font-size:1.6rem;font-weight:700;margin-bottom:2rem;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+.form-group{margin-bottom:1.3rem;}
+.form-group label{display:block;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:.5rem;}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--text-primary);padding:.9rem 1rem;font-family:var(--font-body);font-size:.9rem;outline:none;resize:none;transition:border-color .25s,background .25s,box-shadow .25s;border-radius:8px;-webkit-appearance:none;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--text-muted);}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--violet);background:rgba(168,85,247,0.04);box-shadow:0 0 0 3px rgba(168,85,247,0.1);}
+.form-group textarea{height:120px;}
+.form-group select{cursor:none;color:var(--text-secondary);}
+.form-group select option{background:var(--bg-mid);color:var(--text-primary);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.submit-btn{width:100%;padding:1.1rem;background:var(--grad-btn);color:#050812;border:none;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;cursor:none;border-radius:8px;transition:opacity .2s,transform .2s,box-shadow .2s;margin-top:.5rem;box-shadow:0 0 24px rgba(168,85,247,0.3);}
+.submit-btn:hover{opacity:.88;transform:translateY(-2px);box-shadow:0 8px 32px rgba(168,85,247,0.5);}
+.form-ok{display:none;padding:2.5rem;text-align:center;border:1px solid rgba(15,244,198,0.25);border-radius:12px;background:rgba(15,244,198,0.05);}
+.form-ok .ok-icon{font-size:2.5rem;margin-bottom:1rem;}
+.form-ok h4{font-family:var(--font-display);font-size:1.4rem;margin-bottom:.5rem;background:var(--grad-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.form-ok p{font-family:'Playfair Display',serif;font-style:italic;color:var(--text-secondary);}
+
+/* PLATFORMS */
+.platforms-row{display:flex;gap:.7rem;margin-top:2rem;flex-wrap:wrap;}
+.plat-btn{display:flex;align-items:center;gap:.6rem;padding:.65rem 1.1rem;border:1px solid var(--border);border-radius:8px;color:var(--text-muted);text-decoration:none;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;transition:all .22s;}
+.plat-btn:hover{border-color:var(--teal);color:var(--teal);background:rgba(15,244,198,0.06);}
+.plat-btn svg{width:13px;height:13px;}
+
+@media(max-width:900px){
+  .contact-wrap{grid-template-columns:1fr;padding-top:5rem;}
+  .c-left{padding:5rem 5vw 3rem;border-right:none;border-bottom:1px solid var(--border);}
+  .c-left::after{display:none;}
+  .c-right{padding:3rem 5vw 5rem;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="aurora-bg"><div class="aurora-orb3"></div></div>
+<div class="grain"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div id="progress-bar"></div>
+<div class="page-cover" id="cover"></div>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-logo">Megha V.</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-hire">Hire Me</a>
+</nav>
+
+<div class="contact-wrap">
+  <div class="c-left">
+    <div class="avail-chip rv"><span class="avail-dot"></span>Available for Opportunities · 2026</div>
+    <h1 class="c-title rv d1"><span class="line1">LET'S</span><span class="line2">Connect.</span></h1>
+    <p class="c-sub rv d2">Open to internships, research collaborations, and meaningful AI projects. If you have something worth building — I'd love to be part of it.</p>
+    <div class="c-links rv d2">
+      <a href="mailto:meghavenu890@gmail.com" class="c-link">
+        <div class="c-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+        <div><div class="c-link-type">Email</div><div class="c-link-val">meghavenu890@gmail.com</div></div>
+      </a>
+      <a href="tel:6379610346" class="c-link">
+        <div class="c-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.16 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div><div class="c-link-type">Phone</div><div class="c-link-val">+91 63796 10346</div></div>
+      </a>
+      <a href="https://linkedin.com/in/megha-venugopal" target="_blank" class="c-link">
+        <div class="c-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div><div class="c-link-type">LinkedIn</div><div class="c-link-val">linkedin.com/in/megha-venugopal</div></div>
+      </a>
+      <a href="https://github.com/meghavenu" target="_blank" class="c-link">
+        <div class="c-link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+        <div><div class="c-link-type">GitHub</div><div class="c-link-val">github.com/meghavenu</div></div>
+      </a>
+    </div>
+    <div class="platforms-row rv d3">
+      <a href="https://leetcode.com/meghavenugopal" target="_blank" class="plat-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>LeetCode</a>
+      <a href="https://hackerrank.com/meghavenu890" target="_blank" class="plat-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>HackerRank</a>
+    </div>
+  </div>
+
+  <div class="c-right">
+    <h3>Send a Message</h3>
+    <div id="cForm">
+      <div class="form-row">
+        <div class="form-group"><label>Your Name</label><input type="text" id="fn" placeholder="Jane Smith"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="fe" placeholder="jane@company.com"></div>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <select id="fs"><option value="">Select a topic…</option><option>Internship Opportunity</option><option>Research Collaboration</option><option>Project Discussion</option><option>General Inquiry</option></select>
+      </div>
+      <div class="form-group"><label>Message</label><textarea id="fm" placeholder="Tell me about your opportunity or project…"></textarea></div>
+      <button class="submit-btn" onclick="sendMsg()">Send Message ✦</button>
+    </div>
+    <div class="form-ok" id="fok">
+      <div class="ok-icon">✦</div>
+      <h4>Message Sent!</h4>
+      <p>Thanks for reaching out. I'll get back to you within 24 hours.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<footer class="footer">
+  <p>© 2025 Megha V — AI &amp; Data Science</p>
+  <div class="footer-social">
+    <a href="https://github.com/meghavenu" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+    <a href="https://linkedin.com/in/megha-venugopal" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+  </div>
+  <p>Coimbatore, Tamil Nadu</p>
+</footer>
+<script>
+function sendMsg(){
+  const n=document.getElementById('fn').value.trim(),e=document.getElementById('fe').value.trim(),m=document.getElementById('fm').value.trim();
+  if(!n||!e||!m){[document.getElementById('fn'),document.getElementById('fe'),document.getElementById('fm')].forEach(f=>{if(!f.value.trim()){f.style.borderColor='var(--rose)';setTimeout(()=>f.style.borderColor='',2500);}});return;}
+  document.getElementById('cForm').style.display='none';
+  document.getElementById('fok').style.display='block';
+}
+</script>
+<script src="main.js"></script>
+</body>
+</html>
